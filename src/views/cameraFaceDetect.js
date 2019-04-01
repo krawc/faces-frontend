@@ -75,24 +75,36 @@ class CameraFaceDetect extends Component {
       ).then((fullDesc) => {
         this.setState({ fullDesc });
         let landmarks_out = [];
-        let landmarks_in = fullDesc[0].faceLandmarks.positions
-        for (let i = 0; i < landmarks_in.length; i ++) {
-          landmarks_out.push(Math.floor(landmarks_in[i].x));
-          landmarks_out.push(Math.floor(landmarks_in[i].y));
-        }
-
-        let landmarks_post = "[" + landmarks_out.toString() + "]";
-        console.log(landmarks_post);
-        let result = fetch('https://faces-restful.herokuapp.com/api/predict', {
-          headers: {
-             'Accept': 'application/json',
-             'Content-Type': 'application/json'
-           },
-          method: 'POST',
-           body: {
-            "landmarks": landmarks_post
+        if (fullDesc[0]) {
+          let landmarks_in = fullDesc[0].faceLandmarks.positions
+          for (let i = 0; i < landmarks_in.length; i ++) {
+            landmarks_out.push(Math.floor(landmarks_in[i].x));
+            landmarks_out.push(Math.floor(landmarks_in[i].y));
           }
-        }).then((result) => {console.log(result)});
+
+          let landmarks_post = "[" + landmarks_out.toString() + "]";
+          console.log(landmarks_post);
+          let result = fetch('https://faces-restful.herokuapp.com/api/predict', {
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+             },
+            method: 'POST',
+             body: {
+              "landmarks": landmarks_post
+            }
+          }).then((result) => {
+            if (result.result) {
+              let agency = result.result.agency.replace("[", "").replace("]", "");
+              let communion = result.result.communion.replace("[", "").replace("]", "");
+              let agency_communion = {
+                agency: agency,
+                communion: communion
+              }
+              this.setState({result: communion});
+            }
+          });
+        }
       });
     }
   };
