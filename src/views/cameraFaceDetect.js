@@ -94,6 +94,7 @@ class CameraFaceDetect extends Component {
               "landmarks": landmarks_post
             }
           }).then((result) => {
+            console.log(result)
             if (result.result) {
               let agency = result.result.agency.replace("[", "").replace("]", "");
               let communion = result.result.communion.replace("[", "").replace("]", "");
