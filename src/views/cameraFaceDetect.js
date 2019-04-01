@@ -84,15 +84,18 @@ class CameraFaceDetect extends Component {
 
           let landmarks_post = "[" + landmarks_out.toString() + "]";
           console.log(landmarks_post);
+          let body = {
+            "landmarks": landmarks_post
+          }
           let result = fetch('https://faces-restful.herokuapp.com/api/predict', {
             headers: {
                'Accept': 'application/json',
                'Content-Type': 'application/json'
              },
             method: 'POST',
-             body: {
-              "landmarks": landmarks_post
-            }
+            body: JSON.stringify(body)
+          }).then((result_str) => {
+            return result_str.json()
           }).then((result) => {
             console.log(result)
             if (result.result) {
@@ -102,7 +105,7 @@ class CameraFaceDetect extends Component {
                 agency: agency,
                 communion: communion
               }
-              this.setState({result: communion});
+              this.setState({result: agency_communion});
             }
           });
         }
