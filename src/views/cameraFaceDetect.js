@@ -29,7 +29,7 @@ class CameraFaceDetect extends Component {
       },
       labels: {
         agency: ["LOW", "MODERATE", "HIGH"],
-        communion: ["NOT HIGHLY", "MODERATE", "HIGHLY"],
+        communion: ["LOW", "MODERATE", "HIGH"],
       },
       messageSent: false
     };
