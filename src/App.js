@@ -13,10 +13,7 @@ class App extends Component {
       <div className="App">
         <Router history={createHistory({ basename: process.env.PUBLIC_URL })}>
           <div className="route">
-            <Header />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/photo" component={FaceRecognition} />
-            <Route exact path="/camera" component={CameraFaceDetect} />
+            <Route exact path="/" component={CameraFaceDetect} />
           </div>
         </Router>
       </div>
