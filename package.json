@@ -5,7 +5,6 @@
   "license": "MIT",
   "homepage": "http://supachaic.github.io/bnk48-face-recognition",
   "dependencies": {
-    "babel-loader": "^8.0.5",
     "face-api.js": "^0.16.1",
     "gh-pages": "^2.0.1",
     "react": "^16.6.3",
